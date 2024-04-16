@@ -1,0 +1,19 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit",
+    "source.fixAll.sortJSON": "explicit",
+  },
+  // Enable ESlint flat config support
+  "eslint.experimental.useFlatConfig": true,
+  "eslint.enable": true,
+  "eslint.options": {
+    "extensions": [
+      ".html",
+      ".js",
+      ".ts",
+      ".vue",
+    ]
+  },
+}
