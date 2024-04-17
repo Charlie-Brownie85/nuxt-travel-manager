@@ -1,4 +1,5 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
+
 import preset from './tailwind-preset';
 
 export default <Partial<Config>>{
@@ -20,7 +21,8 @@ export default <Partial<Config>>{
     },
   },
   plugins: [
-    function initial({ addVariant }: { addVariant: Function }) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    function initial({ addVariant }: { addVariant: any }) {
       addVariant('initial', 'html :where(&)');
     },
   ],

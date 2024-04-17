@@ -8,12 +8,4 @@
   // Enable ESlint flat config support
   "eslint.experimental.useFlatConfig": true,
   "eslint.enable": true,
-  "eslint.options": {
-    "extensions": [
-      ".html",
-      ".js",
-      ".ts",
-      ".vue",
-    ]
-  },
 }

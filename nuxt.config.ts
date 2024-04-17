@@ -4,11 +4,7 @@ export default defineNuxtConfig({
   modules: ['@nuxt/eslint', '@nuxtjs/tailwindcss', '@pinia/nuxt'],
   eslint: {
     config: {
-      stylistic: {
-        semi: 'always',
-        indent: ['error', 2],
-        'arrow-parens': 'as-needed',
-      }
+      // stylistic: true,
     },
   },
 })

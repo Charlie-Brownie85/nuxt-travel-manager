@@ -1,14 +1,22 @@
-// @ts-check
-import withNuxt from './.nuxt/eslint.config.mjs'
+/* eslint-env node */
+// require('@rushstack/eslint-patch/modern-module-resolution')
 
-export default withNuxt({
-  languageOptions: {
-    globals: {
-      context: true,
-      jest: true,
-    }
+module.exports = {
+  root: true,
+  env: {
+    node: true,
+  },
+  globals: {
+    context: true,
+    jest: true,
+  },
+  extends: ['@nuxt/eslint-config'],
+  parserOptions: {
+    ecmaVersion: 'latest',
   },
   rules: {
+    semi: [2, 'always'],
+    indent: ['error', 2, { SwitchCase: 2 }],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     'no-useless-return': 'warn',
@@ -23,6 +31,8 @@ export default withNuxt({
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
     'import/prefer-default-export': 'off',
+    'arrow-parens': 'off',
+    'max-len': 'off',
     'import/order': [
       2,
       {
@@ -39,5 +49,19 @@ export default withNuxt({
         ],
       },
     ],
+
   },
-})
+  overrides: [
+    {
+      files: [
+        '**/__tests__/*.{j,t}s?(x)',
+        '**/tests/unit/**/*.spec.{j,t}s?(x)',
+        '**/*.test.js',
+        '**/*.spec.js',
+      ],
+      env: {
+        jest: true,
+      },
+    },
+  ],
+};
