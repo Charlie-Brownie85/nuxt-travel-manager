@@ -3,11 +3,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
+    "build": "nuxi build",
+    "dev": "nuxi dev",
+    "generate": "nuxi generate",
+    "preview": "nuxi preview",
+    "postinstall": "nuxi prepare",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prepare": "husky"
@@ -26,6 +26,7 @@
     "@nuxtjs/tailwindcss": "^6.11.4",
     "eslint": "^9.0.0",
     "husky": "^9.0.11",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vue-tsc": "^1"
   }
 }

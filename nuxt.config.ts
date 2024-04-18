@@ -7,4 +7,7 @@ export default defineNuxtConfig({
       // stylistic: true,
     },
   },
+  typescript: {
+    typeCheck: true,
+  },
 })

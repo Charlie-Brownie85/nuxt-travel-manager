@@ -2,7 +2,7 @@
 <template>
   <div>
     <NavBar />
-    <div>
+    <div class="p-4">
       <slot />
     </div>
   </div>
