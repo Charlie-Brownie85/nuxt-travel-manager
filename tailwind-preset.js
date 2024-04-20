@@ -13,7 +13,8 @@ const colors = {
   state: {
     error: {
       300: '#FED1D6',
-      500: '#c40303',
+      500: '#FF3D71',
+      700: '#c40303',
     },
     success: {
       300: '#CBFAD5',

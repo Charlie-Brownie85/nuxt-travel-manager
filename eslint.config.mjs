@@ -1,5 +1,5 @@
 // @ts-check
-import withNuxt from './.nuxt/eslint.config.mjs'
+import withNuxt from './.nuxt/eslint.config.mjs';
 
 export default withNuxt({
   languageOptions: {
@@ -9,6 +9,8 @@ export default withNuxt({
     }
   },
   rules: {
+    semi: [2, 'always'],
+    indent: ['error', 2, { SwitchCase: 2 }],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     'no-useless-return': 'warn',
@@ -40,4 +42,4 @@ export default withNuxt({
       },
     ],
   },
-})
+});

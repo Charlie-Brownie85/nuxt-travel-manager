@@ -1,7 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxt/eslint', '@nuxtjs/tailwindcss', '@pinia/nuxt'],
+  modules: [
+    '@nuxt/eslint',
+    '@nuxtjs/tailwindcss',
+    '@pinia/nuxt',
+    "vuetify-nuxt-module"
+  ],
   eslint: {
     config: {
       // stylistic: true,
@@ -10,4 +15,8 @@ export default defineNuxtConfig({
   typescript: {
     typeCheck: true,
   },
-})
+  components: [{
+    path: '~/components',
+    pathPrefix: false,
+  }]
+});
