@@ -59,7 +59,8 @@ export const bookings: Array<Booking> = [
     id: 1,
     travelId: 3,
     customerInfo: {
-      name: 'John Doe',
+      firstName: 'John',
+      lastName: 'Doe',
       email: 'johndoe@mail.com',
       phone: '+1234567890',
       age: 30,
@@ -72,7 +73,8 @@ export const bookings: Array<Booking> = [
     id: 2,
     travelId: 1,
     customerInfo: {
-      name: 'Jane Doe',
+      firstName: 'Jane',
+      lastName: 'Doe',
       email: 'janedoe@mail.com',
       phone: '+0987654321',
       age: 27,
@@ -84,7 +86,8 @@ export const bookings: Array<Booking> = [
     id: 3,
     travelId: 2,
     customerInfo: {
-      name: 'Alice Smith',
+      firstName: 'Alice',
+      lastName: 'Smith',
       email: 'alicesmith@mail.com',
       phone: '+5432167890',
       age: 36,

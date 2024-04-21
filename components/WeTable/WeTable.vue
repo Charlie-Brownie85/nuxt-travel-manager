@@ -34,6 +34,28 @@ function deleteItem(item: any) {
     <template #item.name="{ item }">
       <span class="font-bold text-base">{{ item.name }}</span> 
     </template>
+    <template #item.travelName="{ item }">
+      <span class="font-bold text-base">{{ item.travelName }}</span> 
+    </template>
+    <template #item.payment="{ item }">
+      <span class="text-base italic">{{ item.payment }}</span> 
+    </template>
+    <template #item.notes="{ item }">
+      <span class="text-base italic">{{ item?.notes }}</span> 
+    </template>
+    <template #item.customerInfo="{ item }">
+      <div class="flex flex-col">
+        <span class="text-base">
+          {{ `${item.customerInfo.firstName} ${item.customerInfo.lastName}` }}
+        </span>
+        <span class="text-sm italic">
+          {{ item.customerInfo.email }}
+        </span>
+        <span class="text-sm italic">
+          {{ item.customerInfo.phone }}
+        </span>
+      </div>
+    </template>
     <template #item.image="{ item }">
       <div class="py-2">
         <img

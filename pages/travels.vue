@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { Ref } from 'vue';
-
 import type { Travel } from '~/declarations/common.types';
 import { travelsHeaders } from '~/config/data-tables.config';
 
@@ -10,8 +8,9 @@ const loading = ref(false);
 async function fetchTravels() {
   loading.value = true;
   const { data } = await useFetch('/api/travels');
+  
   if(data.value !== null) {
-    travels.value = data.value.travels;
+    travels.value = data.value as Travel[];
   }
   loading.value = false;
 }

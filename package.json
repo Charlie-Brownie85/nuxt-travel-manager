@@ -10,10 +10,12 @@
     "postinstall": "nuxi prepare",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepare": "husky"
+    "prepare": "husky",
+    "start:backend": "json-server backend/db.json --port 3001"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.5.1",
+    "json-server": "^1.0.0-alpha.23",
     "nuxt": "^3.11.2",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",

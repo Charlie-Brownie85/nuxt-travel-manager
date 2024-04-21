@@ -1,0 +1,95 @@
+{
+  "bookings": [
+    {
+      "customerInfo": {
+        "age": 30,
+        "email": "johndoe@mail.com",
+        "firstName": "John",
+        "gender": "male",
+        "lastName": "Doe",
+        "phone": "+1234567890"
+      },
+      "id": 1,
+      "notes": "I need a gluten-free breakfast",
+      "payment": "transfer",
+      "travelId": 3
+    },
+    {
+      "customerInfo": {
+        "age": 27,
+        "email": "janedoe@mail.com",
+        "firstName": "Jane",
+        "gender": "female",
+        "lastName": "Doe",
+        "phone": "+0987654321"
+      },
+      "id": 2,
+      "payment": "revolut",
+      "travelId": 1
+    },
+    {
+      "customerInfo": {
+        "age": 36,
+        "email": "alicesmith@mail.com",
+        "firstName": "Alice",
+        "gender": "female",
+        "lastName": "Smith",
+        "phone": "+5432167890"
+      },
+      "id": 3,
+      "notes": "I'd love a room with a view",
+      "payment": "paypal",
+      "travelId": 2
+    }
+  ],
+  "travels": [
+    {
+      "currency": "EUR",
+      "description": "Discover the beauty of Rome in 5 days. Visit the Colosseum, the Vatican, the Pantheon and much more.",
+      "endDate": "2024-05-27",
+      "id": 1,
+      "image": "/img/rome.webp",
+      "location": "Italy",
+      "name": "Rome in 5 days",
+      "price": 680,
+      "rating": 5,
+      "startDate": "2024-05-21"
+    },
+    {
+      "currency": "EUR",
+      "description": "Experience the romantic Paris in a weekend. Visit the Eiffel Tower, the Louvre, the Champs-Élysées and much more.",
+      "endDate": "2024-06-24",
+      "id": 2,
+      "image": "/img/paris.webp",
+      "location": "France",
+      "name": "Weekend in Paris",
+      "price": 1000,
+      "rating": 5,
+      "startDate": "2024-06-21"
+    },
+    {
+      "currency": "EUR",
+      "description": "Discover the beauty of Perú in 17 days. Visit Machu Picchu, the Nazca Lines, the Amazon Rainforest and much more.",
+      "endDate": "2024-11-17",
+      "id": 3,
+      "image": "/img/peru.webp",
+      "location": "Perú",
+      "name": "Perú 360º",
+      "price": 2200,
+      "rating": 4,
+      "startDate": "2024-11-01"
+    },
+    {
+      "currency": "EUR",
+      "description": "Dive in the authentic american experience in New York in 7 days. Visit the Statue of Liberty, Central Park, Times Square and much more.",
+      "endDate": "2024-10-21",
+      "id": 4,
+      "image": "/img/ny.webp",
+      "location": "United States",
+      "name": "New York, New York!",
+      "price": 1500,
+      "rating": 3,
+      "startDate": "2024-10-15"
+    }
+  ]
+}

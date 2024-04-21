@@ -1,7 +1,6 @@
-import { travels } from '~/__mocks__/mockData';
-
 export default defineEventHandler(async () => {
-  return {
-    travels,
-  };
+
+  const travels = await $fetch('http://localhost:3001/travels');
+
+  return travels;
 });

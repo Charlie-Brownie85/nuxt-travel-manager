@@ -1,3 +1,10 @@
+type customerSummary = {
+  firstName: string,
+  lastName: string,
+  email: string,
+  phone: string,
+}
+
 export const travelsHeaders = [
   { title: 'Travel name', key: 'name', sortable: true },
   { title: 'Picture', key: 'image', sortable: false },
@@ -9,8 +16,9 @@ export const travelsHeaders = [
 ];
 
 export const bookingsHeaders = [
-  { title: 'Travel name', key: 'travelName' },
-  { title: 'Customer Info', key: 'customerInfo' },
-  { title: 'Payment type', key: 'payment' },
-  { title: 'Notes', key: 'notes' }
+  { title: 'Travel name', key: 'travelName', sortable: true },
+  { title: 'Customer Info', key: 'customerInfo', sortable: true, sort: (a: customerSummary, b: customerSummary) => a.lastName.localeCompare(b.lastName) },
+  { title: 'Payment type', key: 'payment', sortable: true },
+  { title: 'Notes', key: 'notes', sortable: true },
+  { title: 'Actions', key: 'actions', sortable: false }
 ];
