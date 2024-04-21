@@ -7,13 +7,13 @@
     <nav class="container mx-auto">
       <ul class="flex gap-4">
         <li>
-          <NuxtLink to="/" class="block px-2 py-4 font-bold text-base-800 hover:bg-base-300">Home</NuxtLink>
+          <NuxtLink to="/" class="block px-2 py-4 font-bold text-base-800 hover:bg-base-300 hover:text-primary-200">Home</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/travels" class="block px-2 py-4 font-bold text-base-800 hover:bg-base-300">Travels</NuxtLink>
+          <NuxtLink to="/travels" class="block px-2 py-4 font-bold text-base-800 hover:bg-base-300 hover:text-primary-200">Travels</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/bookings" class="block px-2 py-4 font-bold text-base-800 hover:bg-base-300">Bookings</NuxtLink>
+          <NuxtLink to="/bookings" class="block px-2 py-4 font-bold text-base-800 hover:bg-base-300 hover:text-primary-200">Bookings</NuxtLink>
         </li>
       </ul>
     </nav>
@@ -22,6 +22,6 @@
 
 <style lang="postcss" scoped>
 .router-link-exact-active {
-  @apply text-state-info-500;
+  @apply text-primary-300;
 }
 </style>

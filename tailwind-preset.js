@@ -10,6 +10,18 @@ const colors = {
     800: '#212121',
     900: '#191414',
   },
+  primary: {
+    100: '#FFD9E6',
+    200: '#f17d88',
+    300: '#FF4758',
+    500: '#FF3D71',
+    700: '#C40303',
+  },
+  secondary: {
+    100: '#7b7b7b',
+    200: '#525252',
+    300: '#1A1A1A',
+  },
   state: {
     error: {
       300: '#FED1D6',
@@ -32,7 +44,6 @@ const colors = {
     },
   },
 };
-
 module.exports = {
   darkMode: 'class',
   theme: {

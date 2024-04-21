@@ -1,5 +1,6 @@
 export const travelsHeaders = [
   { title: 'Travel name', key: 'name', sortable: true },
+  { title: 'Picture', key: 'image', sortable: false },
   { title: 'Departure date', key: 'startDate', sortable: true },
   { title: 'Return date', key: 'endDate', sortable: true },
   { title: 'Price per person', key: 'price', sortable: true },

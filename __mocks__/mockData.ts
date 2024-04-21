@@ -11,7 +11,7 @@ export const travels: Array<Travel> = [
     startDate: '2024-05-21',
     endDate: '2024-05-27',
     description: 'Discover the beauty of Rome in 5 days. Visit the Colosseum, the Vatican, the Pantheon and much more.',
-    image: 'rome.jpg',
+    image: '/img/rome.webp',
     price: 680,
     currency: 'EUR',
     rating: 5
@@ -23,7 +23,7 @@ export const travels: Array<Travel> = [
     startDate: '2024-06-21',
     endDate: '2024-06-24',
     description: 'Experience the romantic Paris in a weekend. Visit the Eiffel Tower, the Louvre, the Champs-Élysées and much more.',
-    image: 'paris.jpg',
+    image: '/img/paris.webp',
     price: 1000,
     currency: 'EUR',
     rating: 5
@@ -35,7 +35,7 @@ export const travels: Array<Travel> = [
     startDate: '2024-11-01',
     endDate: '2024-11-17',
     description: 'Discover the beauty of Perú in 17 days. Visit Machu Picchu, the Nazca Lines, the Amazon Rainforest and much more.',
-    image: 'peru.jpg',
+    image: '/img/peru.webp',
     price: 2200,
     currency: 'EUR',
     rating: 4
@@ -47,7 +47,7 @@ export const travels: Array<Travel> = [
     startDate: '2024-10-15',
     endDate: '2024-10-21',
     description: 'Dive in the authentic american experience in New York in 7 days. Visit the Statue of Liberty, Central Park, Times Square and much more.',
-    image: 'new-york.jpg',
+    image: '/img/ny.webp',
     price: 1500,
     currency: 'EUR',
     rating: 3

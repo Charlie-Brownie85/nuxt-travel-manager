@@ -1,0 +1,56 @@
+.btn {
+  @apply flex items-center gap-1 rounded-md px-2 py-1 text-base font-normal cursor-pointer border-[0.0625rem] border-solid;
+  transition: all 0.3s ease;
+
+  &:disabled {
+    @apply cursor-not-allowed pointer-events-none;
+  }
+
+  &--primary {
+    @apply bg-primary-200 border-primary-200 text-white;
+
+    &:hover,
+    &.active {
+      @apply bg-primary-300 border-primary-300;
+    }
+    &:disabled {
+      @apply bg-primary-100 border-primary-100;
+    }
+
+    &--outline {
+      @apply bg-transparent text-primary-300 border-primary-300;
+
+      &:hover,
+      &.active {
+        @apply bg-primary-300 text-white border-primary-300;
+      }
+      &:disabled {
+        @apply bg-transparent text-primary-200 border-primary-200 opacity-75;
+      }
+    }
+  }
+
+  &--secondary {
+    @apply bg-secondary-200 border-secondary-200 text-white;
+
+    &:hover,
+    &.active {
+      @apply bg-secondary-300 border-secondary-300;
+    }
+    &:disabled {
+      @apply bg-secondary-100 border-secondary-100;
+    }
+
+    &--outline {
+      @apply bg-transparent text-secondary-300 border-secondary-300;
+
+      &:hover,
+      &.active {
+        @apply bg-secondary-300 text-white border-secondary-300;
+      }
+      &:disabled {
+        @apply bg-transparent text-secondary-200 border-secondary-200 opacity-75;
+      }
+    }
+  }
+}
