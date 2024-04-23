@@ -5,7 +5,8 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
-    "vuetify-nuxt-module"
+    'vuetify-nuxt-module',
+    '@vueuse/nuxt',
   ],
   eslint: {
     config: {

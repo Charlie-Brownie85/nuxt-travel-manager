@@ -7,10 +7,10 @@ const loading = ref(false);
 
 async function fetchTravels() {
   loading.value = true;
-  const { data } = await useFetch('/api/travels');
+  const fetchedTravels: Travel[] = await $fetch('/api/travels');
   
-  if(data.value !== null) {
-    travels.value = data.value as Travel[];
+  if(fetchedTravels?.length) {
+    travels.value = fetchedTravels;
   }
   loading.value = false;
 }
@@ -23,8 +23,19 @@ function editItem(item: Travel) {
   console.log('Edit item', item);
 }
 
-function deleteItem(item: Travel) {
-  console.log('Delete item', item);
+async function deleteTravel(item: Travel) {
+  loading.value = true;
+
+  const deleted = await $fetch(`/api/travels/${item.id}`, {
+    method: 'DELETE',
+  });
+
+  if(deleted) {
+    //refetch data
+    fetchTravels();
+  }
+
+  loading.value = false;
 }
 
 </script>
@@ -38,7 +49,7 @@ function deleteItem(item: Travel) {
         :items="travels"
         :loading="loading"
         @edit-item="editItem"
-        @delete-item="deleteItem"
+        @delete-item="deleteTravel"
       />
     </div>
   </div>

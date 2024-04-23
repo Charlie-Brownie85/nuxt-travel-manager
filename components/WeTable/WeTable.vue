@@ -16,12 +16,21 @@ const emit = defineEmits(['editItem', 'deleteItem']);
 
 const props = defineProps<Props>();
 
+const selectedItem = ref<any>(null);
+const showDeleteModal = ref(false);
+
 function editItem(item: any) {
   emit('editItem', item);
 }
 
-function deleteItem(item: any) {
-  emit('deleteItem', item);
+function deleteItem() {
+  emit('deleteItem', selectedItem.value);
+  showDeleteModal.value = false;
+}
+
+function openDeleteModal(item: any) {
+  selectedItem.value = item;
+  showDeleteModal.value = true;
 }
 </script>
 
@@ -103,7 +112,7 @@ function deleteItem(item: any) {
         <button
           class="btn btn--primary"
           type="button"
-          @click="deleteItem(item)"
+          @click="openDeleteModal(item)"
         >
         <v-icon
           size="small"
@@ -117,6 +126,29 @@ function deleteItem(item: any) {
       </div>
     </template>
   </v-data-table>
+  <WeModal v-model="showDeleteModal">
+    <template #content>
+      <p class="text-base font-bold">Are you sure you want to delete this item?</p>
+    </template>
+    <template #actions="{ close }">
+      <div class="flex gap-2">
+        <button
+          class="btn btn--secondary--outline"
+          type="button"
+          @click="close()"
+        >
+          <span>Cancel</span>
+        </button>
+        <button
+          class="btn btn--primary"
+          type="button"
+          @click="deleteItem"
+        >
+          <span>Delete</span>
+        </button>
+      </div>
+    </template>
+  </WeModal>
 </template>
 
 <style lang="postcss" scoped>
