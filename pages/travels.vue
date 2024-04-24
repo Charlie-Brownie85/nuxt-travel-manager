@@ -72,13 +72,13 @@ watch(showTravelModal, (newValue, oldValue) => {
 
 <template>
   <div class="container mx-auto">
-    <h1 class="mb-8 text-3xl font-bold">Travels</h1>
+    <h1 class="mb-8 text-3xl font-bold">{{ $t('Travels') }}</h1>
     <div>
       <div class="mb-3 flex items-center gap-4">
         <button type="button" class="add-btn" @click="showTravelModal = true">
           <v-icon size="small">mdi-plus</v-icon>
         </button>
-        <span class="text-base font-bold">Add new travel</span>
+        <span class="text-base font-bold">{{ $t('Add new travel') }}</span>
       </div>
       <WeTable
         :headers="travelsHeaders"

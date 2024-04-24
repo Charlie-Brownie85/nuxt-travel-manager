@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     'vuetify-nuxt-module',
     '@vueuse/nuxt',
     '@vee-validate/nuxt',
+    '@nuxtjs/i18n',
   ],
   routeRules: {
     '/': { redirect: '/travels' },

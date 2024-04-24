@@ -51,13 +51,13 @@ async function deleteBooking(item: Booking) {
 
 <template>
   <div class="container mx-auto">
-    <h1 class="mb-8 text-3xl font-bold">Bookings</h1>
+    <h1 class="mb-8 text-3xl font-bold">{{ $t('Bookings') }}</h1>
     <div>
       <div class="mb-3 flex items-center gap-4">
         <button type="button" class="add-btn" @click="() => console.log('Create a booking')">
           <v-icon size="small">mdi-plus</v-icon>
         </button>
-        <span class="text-base font-bold">Add new booking</span>
+        <span class="text-base font-bold">{{ $t('Add new booking') }}</span>
       </div>
       <WeTable
         :headers="bookingsHeaders"

@@ -125,7 +125,7 @@ function openDeleteModal(item: any) {
           mdi-pencil
         </v-icon>
         <span>
-          Edit
+          {{ $t('Edit') }}
         </span>
         </button>
         <button
@@ -140,7 +140,7 @@ function openDeleteModal(item: any) {
           mdi-delete
         </v-icon>
         <span>
-          Delete
+          {{ $t('Delete') }}
         </span>
         </button>
       </div>
@@ -148,7 +148,7 @@ function openDeleteModal(item: any) {
   </v-data-table>
   <WeModal v-model="showDeleteModal">
     <template #content>
-      <p class="text-base font-bold">Are you sure you want to delete this item?</p>
+      <p class="text-base font-bold">{{ $t('Are you sure you want to delete this item?') }}</p>
     </template>
     <template #actions="{ close }">
       <div class="flex gap-2">
@@ -157,14 +157,14 @@ function openDeleteModal(item: any) {
           type="button"
           @click="close()"
         >
-          <span>Cancel</span>
+          <span>{{ $t('Cancel') }}</span>
         </button>
         <button
           class="btn btn--primary"
           type="button"
           @click="deleteItem"
         >
-          <span>Delete</span>
+          <span>{{ $t('Delete') }}</span>
         </button>
       </div>
     </template>

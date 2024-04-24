@@ -81,12 +81,12 @@ watch(() => props.travel, (value) => {
 <template>
   <WeModal v-model="isOpen">
     <template #content>
-      <h1 class="mb-4 text-2xl font-bold">{{ isEditing ? 'Edit' : 'New' }} Travel</h1>
+      <h1 class="mb-4 text-2xl font-bold">{{ isEditing ? $t('Edit travel') : $t('New travel') }}</h1>
       <VeeForm ref="form" :validation-schema="travelSchema">
         <div class="grid grid-cols-2 gap-4">
           <div v-for="entry in formFields" :key="entry">
             <label :for="entry" class="block text-sm font-medium text-gray-700">
-              {{ fieldLabels[entry] as unknown }}
+              {{ $t(fieldLabels[entry]) as unknown }}
             </label>
             <VeeField
               :id="entry"
@@ -110,7 +110,7 @@ watch(() => props.travel, (value) => {
           type="button"
           @click="close()"
         >
-          <span>Cancel</span>
+          <span>{{ $t('Cancel') }}</span>
         </button>
         <button
           class="btn btn--primary"
@@ -118,7 +118,7 @@ watch(() => props.travel, (value) => {
           :disabled="!isFormValid"
           @click="submitForm"
         >
-          <span>{{ isEditing ? 'Edit travel' : 'Create travel' }}</span>
+          <span>{{ isEditing ? $t('Edit travel') : $t('Create travel') }}</span>
         </button>
       </div>
     </template>
