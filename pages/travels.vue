@@ -84,13 +84,14 @@ watch(showTravelModal, (newValue, oldValue) => {
 </script>
 
 <template>
-  <div>
-    <h1 class="mb-4 text-2xl font-bold">Travels</h1>
-    <div class="container mx-auto">
-      <div>
+  <div class="container mx-auto">
+    <h1 class="mb-8 text-3xl font-bold">Travels</h1>
+    <div>
+      <div class="mb-3 flex items-center gap-4">
         <button type="button" class="add-btn" @click="showTravelModal = true">
           <v-icon size="small">mdi-plus</v-icon>
         </button>
+        <span class="text-base font-bold">Add new travel</span>
       </div>
       <WeTable
         :headers="travelsHeaders"
@@ -111,7 +112,7 @@ watch(showTravelModal, (newValue, oldValue) => {
 
 <style lang="postcss" scoped>
 .add-btn {
-  @apply cursor-pointer bg-base-400 hover:bg-base-500;
+  @apply cursor-pointer bg-base-400 hover:bg-primary-300 text-base-800 hover:text-white;
   @apply flex justify-center items-center p-2 rounded-full min-w-8 min-h-8;
   transition: background-color 0.3s ease;
 }
