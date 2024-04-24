@@ -7,9 +7,6 @@
     <nav class="container mx-auto">
       <ul class="flex gap-4">
         <li>
-          <NuxtLink to="/" class="block px-2 py-4 font-bold text-base-800 hover:bg-base-300 hover:text-primary-200">Home</NuxtLink>
-        </li>
-        <li>
           <NuxtLink to="/travels" class="block px-2 py-4 font-bold text-base-800 hover:bg-base-300 hover:text-primary-200">Travels</NuxtLink>
         </li>
         <li>

@@ -9,6 +9,9 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@vee-validate/nuxt',
   ],
+  routeRules: {
+    '/': { redirect: '/travels' },
+  },
   eslint: {
     config: {
       // stylistic: true,
