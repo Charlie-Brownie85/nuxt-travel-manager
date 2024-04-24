@@ -17,3 +17,7 @@ export function formatCurrency(currency: string): string {
   };
   return currencies[currency] || currency;
 }
+
+export function generateRandomId(): number {
+  return Math.floor(Math.random() * 9000) + 1000;
+}
