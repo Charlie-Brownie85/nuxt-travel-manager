@@ -12,6 +12,7 @@ export interface Props {
   loading: boolean,
   canEditItem?: boolean,
   canDeleteItem?: boolean,
+  enableSearch?: boolean,
 }
 
 const emit = defineEmits(['editItem', 'deleteItem']);
@@ -19,10 +20,12 @@ const emit = defineEmits(['editItem', 'deleteItem']);
 const props = withDefaults(defineProps<Props>(), {
   canEditItem: true,
   canDeleteItem: true,
+  enableSearch: false,
 });
 
 const selectedItem = ref<any>(null);
 const showDeleteModal = ref(false);
+const searchTerm = ref('');
 
 function editItem(item: any) {
   emit('editItem', item);
@@ -40,10 +43,20 @@ function openDeleteModal(item: any) {
 </script>
 
 <template>
-    <v-data-table
+  <div v-if="enableSearch">
+    <input
+      id="search"
+      v-model="searchTerm"
+      type="text"
+      name="search"
+      placeholder="Search travel..."
+      class="mt-1 block w-48 px-3 py-2 border-b-2 border-solid border-base-400 rounded-md focus:outline-none focus:ring-state-info-700 focus:border-state-info-500 sm:text-sm">
+  </div>
+  <v-data-table
     :headers="props.headers"
     :items="props.items"
     :loading="props.loading"
+    :search="enableSearch ? searchTerm : undefined"
   >
     <template #item.name="{ item }">
       <span class="font-bold text-base">{{ item.name }}</span> 

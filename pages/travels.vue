@@ -84,6 +84,7 @@ watch(showTravelModal, (newValue, oldValue) => {
         :headers="travelsHeaders"
         :items="travels || []"
         :loading="loading || pending"
+        :enable-search="true"
         @edit-item="editItem"
         @delete-item="deleteTravel"
       />

@@ -96,7 +96,7 @@ watch(() => props.travel, (value) => {
               :min="entry === 'price' || entry === 'rating' ? 0 : undefined"
               :max="entry === 'rating' ? 5 : undefined"
               :step="entry === 'rating' ? 0.5 : undefined"
-              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              class="mt-1 block w-full px-3 py-2 border border-base-500 rounded-md shadow-sm focus:outline-none focus:ring-state-info-700 focus:border-state-info-500 sm:text-sm"
             />
             <ErrorMessage :name="entry" class="text-primary-300" />
           </div>
