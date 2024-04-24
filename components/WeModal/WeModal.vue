@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<{
 
 const model = defineModel<boolean>({ default: true });
 
-const scrollLock = useScrollLock(document.querySelector('html'));
+const scrollLock = useScrollLock(document?.querySelector('html'));
 
 const close = () => {
   model.value = false;

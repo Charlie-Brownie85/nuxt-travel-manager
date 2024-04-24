@@ -15,60 +15,65 @@ interface BookingSummary extends Omit<BookingData, 'customerInfo'> {
   }
 }
 
-const bookings: Ref<Array<BookingSummary>> = ref([]);
 const loading = ref(false);
 
-async function fetchBookings() {
-  loading.value = true;
-  const { data } = await useFetch('/api/bookings', {
-    transform: (bookingsData: BookingData[]) => bookingsData.map(booking => {
-      const { customerInfo: { firstName, lastName, email, phone } } = booking;
-      return {
-        ...booking,
-        customerInfo: {
-          firstName,
-          lastName,
-          email,
-          phone,
-        },
-      };
-    }),
-  });
-  
-  if(data.value !== null) {
-    bookings.value = data.value as BookingSummary[];
-  }
-  loading.value = false;
-}
+const { data: bookings, pending, refresh } = useFetch<Array<BookingSummary>>('/api/bookings', {
+  transform: (bookingsData: BookingSummary[]) => bookingsData.map(booking => {
+    const { customerInfo: { firstName, lastName, email, phone } } = booking;
+    return {
+      ...booking,
+      customerInfo: {
+        firstName,
+        lastName,
+        email,
+        phone,
+      },
+    };
+  }),
 
-onBeforeMount(() => {
-  fetchBookings();
 });
 
-function editItem(item: BookingSummary) {
-  console.log('Edit item', item);
-}
+async function deleteBooking(item: Booking) {
+  loading.value = true;
 
-function deleteItem(item: BookingSummary) {
-  console.log('Delete item', item);
+  const deleted = await $fetch(`/api/bookings/${item.id}`, {
+    method: 'DELETE',
+  });
+
+  if(deleted) {
+    //refetch data after deletion
+    refresh();
+  }
+
+  loading.value = false;
 }
 </script>
 
 <template>
-  <div>
-    <h1 class="mb-4 text-2xl font-bold">Bookings</h1>
+  <div class="container mx-auto">
+    <h1 class="mb-8 text-3xl font-bold">Bookings</h1>
     <div>
+      <div class="mb-3 flex items-center gap-4">
+        <button type="button" class="add-btn" @click="() => console.log('Create a booking')">
+          <v-icon size="small">mdi-plus</v-icon>
+        </button>
+        <span class="text-base font-bold">Add new booking</span>
+      </div>
       <WeTable
         :headers="bookingsHeaders"
-        :items="bookings"
-        :loading="loading"
-        @edit-item="editItem"
-        @delete-item="deleteItem"
+        :items="bookings || []"
+        :loading="loading || pending"
+        :can-edit-item="false"
+        @delete-item="deleteBooking"
       />
     </div>
   </div>
 </template>
 
 <style lang="postcss" scoped>
-
+.add-btn {
+  @apply cursor-pointer bg-base-400 hover:bg-primary-300 text-base-800 hover:text-white;
+  @apply flex justify-center items-center p-2 rounded-full min-w-8 min-h-8;
+  transition: background-color 0.3s ease;
+}
 </style>

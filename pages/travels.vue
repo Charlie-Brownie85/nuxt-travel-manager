@@ -2,24 +2,11 @@
 import type { Travel } from '~/declarations/common.types';
 import { travelsHeaders } from '~/config/data-tables.config';
 
-const travels: Ref<Array<Travel>> = ref([]);
 const loading = ref(false);
 const showTravelModal = ref(false);
 const selectedTravel = ref<Travel | undefined>(undefined);
 
-async function fetchTravels() {
-  loading.value = true;
-  const fetchedTravels: Travel[] = await $fetch('/api/travels');
-  
-  if(fetchedTravels?.length) {
-    travels.value = fetchedTravels;
-  }
-  loading.value = false;
-}
-
-onBeforeMount(() => {
-  fetchTravels();
-});
+const { data: travels, pending, refresh } = useFetch<Array<Travel>>('/api/travels');
 
 function editItem(item: Travel) {
   selectedTravel.value = item;
@@ -34,8 +21,8 @@ async function deleteTravel(item: Travel) {
   });
 
   if(deleted) {
-    //refetch data
-    fetchTravels();
+    //refetch data after deletion
+    refresh();
   }
 
   loading.value = false;
@@ -51,7 +38,7 @@ async function updateTravel(travel: Travel) {
 
   if(updated) {
     //refetch data after update
-    fetchTravels();
+    refresh();
   }
   
   showTravelModal.value = false;
@@ -67,8 +54,8 @@ async function createTravel(travel: Travel) {
   });
 
   if(created) {
-    //refetch data after update
-    fetchTravels();
+    //refetch data after creation
+    refresh();
   }
   
   showTravelModal.value = false;
@@ -95,8 +82,8 @@ watch(showTravelModal, (newValue, oldValue) => {
       </div>
       <WeTable
         :headers="travelsHeaders"
-        :items="travels"
-        :loading="loading"
+        :items="travels || []"
+        :loading="loading || pending"
         @edit-item="editItem"
         @delete-item="deleteTravel"
       />

@@ -10,11 +10,16 @@ export interface Props {
   headers: ReadonlyHeaders,
   items: Array<any>,
   loading: boolean,
+  canEditItem?: boolean,
+  canDeleteItem?: boolean,
 }
 
 const emit = defineEmits(['editItem', 'deleteItem']);
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  canEditItem: true,
+  canDeleteItem: true,
+});
 
 const selectedItem = ref<any>(null);
 const showDeleteModal = ref(false);
@@ -53,7 +58,7 @@ function openDeleteModal(item: any) {
       <span class="text-base italic">{{ item?.notes }}</span> 
     </template>
     <template #item.customerInfo="{ item }">
-      <div class="flex flex-col">
+      <div class="flex flex-col py-2">
         <span class="text-base">
           {{ `${item.customerInfo.firstName} ${item.customerInfo.lastName}` }}
         </span>
@@ -96,6 +101,7 @@ function openDeleteModal(item: any) {
     <template #item.actions="{ item }">
       <div class="flex gap-2">
         <button
+          v-if="props.canEditItem"
           class="btn btn--secondary--outline"
           type="button"
           @click="editItem(item)"
@@ -110,6 +116,7 @@ function openDeleteModal(item: any) {
         </span>
         </button>
         <button
+          v-if="props.canDeleteItem"
           class="btn btn--primary"
           type="button"
           @click="openDeleteModal(item)"
