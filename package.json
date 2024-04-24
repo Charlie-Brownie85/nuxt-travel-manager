@@ -15,6 +15,8 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.5.1",
+    "@vee-validate/nuxt": "^4.12.6",
+    "@vee-validate/rules": "^4.12.6",
     "@vueuse/nuxt": "^10.9.0",
     "json-server": "^1.0.0-alpha.23",
     "nuxt": "^3.11.2",

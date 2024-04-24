@@ -2,6 +2,7 @@
 import type { Travel } from '~/declarations/common.types';
 
 import { formatCurrency, generateRandomId } from '~/utils';
+import { travelSchema } from '~/config/validation-rules';
 
 export interface Props {
   travel?: Travel,
@@ -13,11 +14,15 @@ const emit = defineEmits(['updateTravel', 'createTravel']);
 
 const props = defineProps<Props>();
 
+const form = ref();
+
+const isFormValid = computed(() => form.value?.getMeta().valid);
+
 const isOpen = defineModel<boolean>({ default: true });
 
 const isEditing = computed(() => !!props.travel);
 
-const editedTravel = reactive(props.travel || {
+const formData = reactive(props.travel || {
   id: generateRandomId(),
   name: '',
   description: '',
@@ -30,13 +35,13 @@ const editedTravel = reactive(props.travel || {
   rating: 3,
 } as Travel);
 
-const formFields: Array<keyof EditableTravel> = Object.keys(editedTravel).filter(field => field !== 'id' && field !== 'currency') as Array<keyof EditableTravel>;
+const formFields: Array<keyof EditableTravel> = Object.keys(formData).filter(field => field !== 'id' && field !== 'currency') as Array<keyof EditableTravel>;
 
 const fieldLabels = {
   name: 'Name',
   description: 'Description',
   location: 'Location (optional)',
-  price: `Price in ${formatCurrency(editedTravel.currency)}`,
+  price: `Price in ${formatCurrency(formData.currency)}`,
   startDate: 'Start Date',
   endDate: 'End Date',
   image: 'Image',
@@ -45,19 +50,19 @@ const fieldLabels = {
 
 function submitForm() {
   if(isEditing.value) {
-    emit('updateTravel', editedTravel);
+    emit('updateTravel', formData);
   } else {
-    emit('createTravel', editedTravel);
+    emit('createTravel', formData);
   }
   isOpen.value = false;
 }
 
 watch(() => props.travel, (value) => {
   if(value) {
-    Object.assign(editedTravel, value);
+    Object.assign(formData, value);
   } else {
-    // reset the editedTravel object
-    Object.assign(editedTravel, {
+    // reset the formData object
+    Object.assign(formData, {
       id: generateRandomId(),
       name: '',
       description: '',
@@ -77,22 +82,26 @@ watch(() => props.travel, (value) => {
   <WeModal v-model="isOpen">
     <template #content>
       <h1 class="mb-4 text-2xl font-bold">{{ isEditing ? 'Edit' : 'New' }} Travel</h1>
-      <form @submit.prevent="submitForm">
+      <VeeForm ref="form" :validation-schema="travelSchema">
         <div class="grid grid-cols-2 gap-4">
-          <div v-for="field in formFields" :key="field">
-            <label :for="field" class="block text-sm font-medium text-gray-700">
-              {{ fieldLabels[field] as unknown }}
+          <div v-for="entry in formFields" :key="entry">
+            <label :for="entry" class="block text-sm font-medium text-gray-700">
+              {{ fieldLabels[entry] as unknown }}
             </label>
-            <input
-              :id="field"
-              v-model="editedTravel[field]"
-              :type="field === 'price' || field === 'rating' ? 'number' : 'text'"
-              :name="field"
+            <VeeField
+              :id="entry"
+              v-model="formData[entry]"
+              :name="entry"
+              :type="entry === 'price' || entry === 'rating' ? 'number' : 'text'"
+              :min="entry === 'price' || entry === 'rating' ? 0 : undefined"
+              :max="entry === 'rating' ? 5 : undefined"
+              :step="entry === 'rating' ? 0.5 : undefined"
               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            >
+            />
+            <ErrorMessage :name="entry" class="text-primary-300" />
           </div>
         </div>
-      </form>
+      </VeeForm>
     </template>
     <template #actions="{ close }">
       <div class="flex gap-2">
@@ -106,6 +115,7 @@ watch(() => props.travel, (value) => {
         <button
           class="btn btn--primary"
           type="button"
+          :disabled="!isFormValid"
           @click="submitForm"
         >
           <span>{{ isEditing ? 'Edit travel' : 'Create travel' }}</span>

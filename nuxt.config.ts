@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'vuetify-nuxt-module',
     '@vueuse/nuxt',
+    '@vee-validate/nuxt',
   ],
   eslint: {
     config: {
@@ -19,5 +20,13 @@ export default defineNuxtConfig({
   components: [{
     path: '~/components',
     pathPrefix: false,
-  }]
+  }],
+  veeValidate: {
+    autoImports: true,
+    componentNames: {
+      Form: 'VeeForm',
+      Field: 'VeeField',
+      FieldArray: 'VeeFieldArray',
+    },
+  },
 });
