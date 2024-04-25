@@ -26,6 +26,7 @@ useHead({
 });
 
 const loading = ref(false);
+const showBookingModal = ref(false);
 
 const { data: bookings, pending, refresh } = useFetch<Array<BookingSummary>>('/api/bookings', {
   transform: (bookingsData: BookingSummary[]) => bookingsData.map(booking => {
@@ -57,6 +58,23 @@ async function deleteBooking(item: Booking) {
 
   loading.value = false;
 }
+
+async function createBooking(booking: Booking) {
+  loading.value = true;
+
+  const created = await $fetch(`/api/bookings`, {
+    method: 'POST',
+    body: { booking: JSON.stringify(booking) },
+  });
+
+  if(created) {
+    //refetch data after creation
+    refresh();
+  }
+  
+  showBookingModal.value = false;
+  loading.value = false;
+}
 </script>
 
 <template>
@@ -64,7 +82,7 @@ async function deleteBooking(item: Booking) {
     <h1 class="mb-8 text-3xl font-bold">{{ $t('Bookings') }}</h1>
     <div>
       <div class="mb-3 flex items-center gap-4">
-        <button type="button" class="add-btn" @click="() => console.log('Create a booking')">
+        <button type="button" class="add-btn" @click="showBookingModal = true">
           <v-icon size="small">mdi-plus</v-icon>
         </button>
         <span class="text-base font-bold">{{ $t('Add new booking') }}</span>
@@ -77,6 +95,10 @@ async function deleteBooking(item: Booking) {
         @delete-item="deleteBooking"
       />
     </div>
+    <BookingForm
+      v-model="showBookingModal"
+      @create-booking="createBooking"
+    />
   </div>
 </template>
 

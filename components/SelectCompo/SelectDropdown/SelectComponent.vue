@@ -4,8 +4,8 @@ import find from 'lodash-es/find';
 import { useElementBounding } from '@/composables/useElementBounding';
 
 export interface Props {
-  modelValue?: boolean | string,
-  options: Array<{ value: string, label: string}>,
+  modelValue?: boolean | string | number,
+  options: Array<{ value: string | number, label: string}>,
   menuMaxHeight?: string,
   xPosition?: 'left' | 'right',
   yPosition?: 'top' | 'bottom',

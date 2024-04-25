@@ -14,6 +14,6 @@ export const customerInfoSchema = {
   lastName: 'required',
   email: 'required|email',
   phone: 'required|phone',
-  age: 'required|integer|min_value:18',
-  gender: 'required',
+  age: '',
+  gender: '',
 };
