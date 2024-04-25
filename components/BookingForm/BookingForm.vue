@@ -4,8 +4,6 @@ import type { Booking, Travel, CustomerInfo } from '~/declarations/common.types'
 import { generateRandomId } from '~/utils';
 import { customerInfoSchema } from '~/config/validation-rules';
 
-// type TravelOption = Pick<Travel, 'id' | 'name'>;
-
 const emit = defineEmits(['createBooking']);
 
 const { t } = useI18n();
@@ -67,8 +65,20 @@ const bookingData = reactive({
   notes: '',
 } as Booking);
 
+function cleanupForm() {
+  userForm.value?.reset();
+  wizzardStep.value = 1;
+  userFormData.firstName = '';
+  userFormData.lastName = '';
+  userFormData.email = '';
+  userFormData.phone = '';
+  userFormData.age = ageOptions[0].value;
+  userFormData.gender = genderOptions[0].value;
+}
+
 function submitForm() {
   emit('createBooking', bookingData);
+  cleanupForm();
   isOpen.value = false;
 }
 </script>
