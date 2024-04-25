@@ -6,6 +6,16 @@ const loading = ref(false);
 const showTravelModal = ref(false);
 const selectedTravel = ref<Travel | undefined>(undefined);
 
+useHead({
+  title: 'WeRoad | Travels',
+  meta: [
+    {
+      name: 'description',
+      content: 'Travels page',
+    },
+  ],
+});
+
 const { data: travels, pending, refresh } = useFetch<Array<Travel>>('/api/travels');
 
 function editItem(item: Travel) {

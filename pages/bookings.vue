@@ -15,6 +15,16 @@ interface BookingSummary extends Omit<BookingData, 'customerInfo'> {
   }
 }
 
+useHead({
+  title: 'WeRoad | Bookings',
+  meta: [
+    {
+      name: 'description',
+      content: 'Bookings page',
+    },
+  ],
+});
+
 const loading = ref(false);
 
 const { data: bookings, pending, refresh } = useFetch<Array<BookingSummary>>('/api/bookings', {
