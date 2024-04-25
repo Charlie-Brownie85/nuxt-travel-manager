@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Travel } from '~/declarations/common.types';
+import type { Travel } from '~/types/common.types';
 import { travelsHeaders } from '~/config/data-tables.config';
 
 const loading = ref(false);

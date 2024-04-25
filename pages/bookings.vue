@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Booking } from '~/declarations/common.types';
+import type { Booking } from '~/types/common.types';
 import { bookingsHeaders } from '~/config/data-tables.config';
 
 interface BookingData extends Omit<Booking, 'travelId'> {

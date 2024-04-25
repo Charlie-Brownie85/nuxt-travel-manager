@@ -1,4 +1,4 @@
-import type { Travel } from '~/declarations/common.types';
+import type { Travel } from '~/types/common.types';
 
 export default defineEventHandler(async (event): Promise<Travel> => {
 

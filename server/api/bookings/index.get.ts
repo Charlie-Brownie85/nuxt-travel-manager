@@ -1,4 +1,4 @@
-import type { Booking, Travel } from '~/declarations/common.types';
+import type { Booking, Travel } from '~/types/common.types';
 
 export default defineEventHandler(async () => {
 

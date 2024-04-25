@@ -1,7 +1,7 @@
 import type {
   Travel,
   Booking,
-} from '~/declarations/common.types';
+} from '~/types/common.types';
 
 export const travels: Array<Travel> = [
   {

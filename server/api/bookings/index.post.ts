@@ -1,4 +1,4 @@
-import type { Booking } from '~/declarations/common.types';
+import type { Booking } from '~/types/common.types';
 
 export default defineEventHandler(async (event): Promise<Booking> => {
 

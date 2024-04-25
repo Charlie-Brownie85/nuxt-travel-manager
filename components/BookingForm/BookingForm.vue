@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Booking, Travel, CustomerInfo } from '~/declarations/common.types';
+import type { Booking, Travel, CustomerInfo } from '~/types/common.types';
 
 import { generateRandomId } from '~/utils';
 import { customerInfoSchema } from '~/config/validation-rules';

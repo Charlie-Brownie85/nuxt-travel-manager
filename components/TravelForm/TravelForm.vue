@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Travel } from '~/declarations/common.types';
+import type { Travel } from '~/types/common.types';
 
 import { formatCurrency, generateRandomId } from '~/utils';
 import { travelSchema } from '~/config/validation-rules';
