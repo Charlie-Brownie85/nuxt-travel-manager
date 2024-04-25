@@ -1,75 +1,79 @@
-# Nuxt 3 Minimal Starter
+# WeRoad Tech Case (by Carlos Orbea)
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Required Tech Stack
 
-## Setup
+- ✅ Vue 3 with composition API
+- ✅ Nuxt3
+- ✅ Typescript
+- ✅ Tailwind
 
-Make sure to install the dependencies:
+## Project description
 
-```bash
-# npm
-npm install
+Build a **travels and bookings management system** consisting of **2 pages**, one to manage travels and the other to manage bookings.
 
-# pnpm
-pnpm install
+### Travels page
 
-# yarn
-yarn install
+The travels should have some basic information like name of the travel, dates of departure and return, a picture, a description of the tour, a price for a single person and an average user rating.
 
-# bun
-bun install
-```
+Travels should be listed in a dedicated page with a table and some basic filters.
 
-## Development Server
+The user should be able to:
+- Use a form to add a new travel
+- Edit an existing travel
+- Delete a travel
 
-Start the development server on `http://localhost:3000`:
+### Bookings page
 
-```bash
-# npm
-npm run dev
+The bookings view should display this info: the related travel, customer info, payment type and eventual internal notes.
 
-# pnpm
-pnpm run dev
+Bookings should be listed in a dedicated page with a table. A booking can be created with a dedicated multi-step form (wizard):
 
-# yarn
-yarn dev
+- first step: search and select the related travel
+- second step: fill the customer info in a dedicated form (name, email, phone number, age, gender)
+- third step: select the payment type (Credit transfer, Paypal, Revolut) and optionally add some notes
 
-# bun
-bun run dev
-```
 
-## Production
+## Notes about the solution provided
 
-Build the application for production:
+- 🔩 The solution provided is written in [TypeScript](https://www.typescriptlang.org/) and making use of Nuxt 3 and [Vue 3](https://vuejs.org/) with **Composition Api**.
 
-```bash
-# npm
-npm run build
+- 🎨 For styling [Tailwind](https://tailwindcss.com/) has been used in combination with [PostCss](https://postcss.org/)
 
-# pnpm
-pnpm run build
+- [vueUse](https://vueuse.org/) has been used for some utility functions
 
-# yarn
-yarn build
+- 🈸 Translations have been added to the project with [@nuxt/i18n](https://i18n.nuxtjs.org/)
 
-# bun
-bun run build
-```
+- Also some basic forms validation with [@vee-validate/nuxt](https://vee-validate.logaretm.com/v4/integrations/nuxt/)
 
-Locally preview production build:
+- There are some commit lint and commit guards in place thanks to [Husky](https://github.com/typicode/husky#readme) and `@commitlint`
 
-```bash
-# npm
-npm run preview
+- Although [Pinia](https://pinia.vuejs.org/) 🍍 is present in the `package.json` I ended up not using it ❌ as there wasn't a lot of data manipulation that required it to be stored and centralized in a single place. Also, as I wanted to display always the newest set of data in each view I ended up re-fetching it from the server, so pulling it from the store wouldn't have added any extra value.
 
-# pnpm
-pnpm run preview
+- [Vuetify for Nuxt](https://nuxt.com/modules/vuetify) was used punctually to save time with some specific convoluted components, like data-tables. If those had needed to be done from scratch, they would have consumed way much more time.
 
-# yarn
-yarn preview
+- ❌🧪 The project does not present any testing due lack of time. Pending task for the future.
 
-# bun
-bun run preview
-```
+- **note about [json-server](https://github.com/typicode/json-server)**: any changes done into the DB will rewrite the file served. In many occasions, in order to reflect those changes live in the project the service needs to be restarted.
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## 🚩 Installation and usage
+
+1. Clone the repository in a folder and install it and its dependencies
+  ```
+  yarn
+  ```
+  or
+  ```
+  npm install
+  ```
+2. Start the mockup backend server run by [json-server](https://github.com/typicode/json-server) to enable backend endpoints with
+  ```
+  yarn run start:backend
+  ```
+4. Run the app with
+  ```
+  yarn dev
+  ```
+  or
+  ```
+  npm run dev
+  ```
