@@ -21,3 +21,9 @@ export function formatCurrency(currency: string): string {
 export function generateRandomId(): number {
   return Math.floor(Math.random() * 9000) + 1000;
 }
+
+export function getScrollableParent(node: HTMLElement | null): HTMLElement | null {
+  if (node === null) return null;
+  if (node.scrollHeight > node.clientHeight) return node;
+  return getScrollableParent(node.parentNode as HTMLElement);
+}

@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@vee-validate/nuxt',
     '@nuxtjs/i18n',
+    'nuxt-lodash',
   ],
   routeRules: {
     '/': { redirect: '/travels' },
