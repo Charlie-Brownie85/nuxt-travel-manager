@@ -6,5 +6,14 @@ export const travelSchema = {
   startDate: 'required|date',
   endDate: 'required|date',
   image: 'required|path',
-  rating: 'required|rating',
+  rating: 'required|between:1,5',
+};
+
+export const customerInfoSchema = {
+  firstName: 'required',
+  lastName: 'required',
+  email: 'required|email',
+  phone: 'required|phone',
+  age: 'required|integer|min_value:18',
+  gender: 'required',
 };
