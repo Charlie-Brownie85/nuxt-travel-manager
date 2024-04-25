@@ -14,6 +14,8 @@ const emit = defineEmits(['updateTravel', 'createTravel']);
 
 const props = defineProps<Props>();
 
+const { t } = useI18n();
+
 const form = ref();
 
 const isFormValid = computed(() => form.value?.getMeta().valid);
@@ -37,16 +39,16 @@ const formData = reactive(props.travel || {
 
 const formFields: Array<keyof EditableTravel> = Object.keys(formData).filter(field => field !== 'id' && field !== 'currency') as Array<keyof EditableTravel>;
 
-const fieldLabels = {
-  name: 'Name',
-  description: 'Description',
-  location: 'Location (optional)',
-  price: `Price in ${formatCurrency(formData.currency)}`,
-  startDate: 'Start Date',
-  endDate: 'End Date',
-  image: 'Image',
-  rating: 'Rating',
-};
+const fieldLabels = computed(() => ({
+  name: t('Name'),
+  description: t('Description'),
+  location: t('Location (optional)'),
+  price: t('Price in {currency}', { currency: formatCurrency(formData.currency) }),
+  startDate: t('Start Date'),
+  endDate: t('End Date'),
+  image: t('Image'),
+  rating: t('Rating'),
+}));
 
 function submitForm() {
   if(isEditing.value) {
@@ -86,7 +88,7 @@ watch(() => props.travel, (value) => {
         <div class="grid grid-cols-2 gap-4">
           <div v-for="entry in formFields" :key="entry">
             <label :for="entry" class="block text-sm font-medium text-gray-700">
-              {{ $t(fieldLabels[entry]) as unknown }}
+              {{ fieldLabels[entry] as unknown }}
             </label>
             <VeeField
               :id="entry"

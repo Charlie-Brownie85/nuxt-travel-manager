@@ -3,6 +3,7 @@ const { locale } = useI18n();
 
 const locales = [
   { value: 'en', label: 'EN' },
+  { value: 'it', label: 'IT' },
   { value: 'es', label: 'ES' },
 ];
 
