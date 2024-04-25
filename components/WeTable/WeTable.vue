@@ -26,6 +26,12 @@ const props = withDefaults(defineProps<Props>(), {
 const selectedItem = ref<any>(null);
 const showDeleteModal = ref(false);
 const searchTerm = ref('');
+const { t } = useI18n();
+
+const translatedHeaders = computed(() => (props.headers ?? []).map(header => ({
+  ...header,
+  title: t(header.title ?? ''),
+})));
 
 function editItem(item: any) {
   emit('editItem', item);
@@ -53,7 +59,7 @@ function openDeleteModal(item: any) {
       class="mt-1 block w-48 px-3 py-2 border-b-2 border-solid border-base-400 rounded-md focus:outline-none focus:ring-state-info-700 focus:border-state-info-500 sm:text-sm">
   </div>
   <v-data-table
-    :headers="props.headers"
+    :headers="translatedHeaders"
     :items="props.items"
     :loading="props.loading"
     :search="enableSearch ? searchTerm : undefined"
