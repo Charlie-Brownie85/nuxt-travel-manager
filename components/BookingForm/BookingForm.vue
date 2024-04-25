@@ -16,6 +16,8 @@ const isFormValid = computed(() => userForm.value?.getMeta().valid);
 
 const isOpen = defineModel<boolean>({ default: true });
 
+const wizzardStep = ref(1);
+
 
 // Select options
 const genderOptions = [
@@ -30,12 +32,7 @@ const paymentOptions = [
   { value: 'paypal', label: t('Paypal') },
   { value: 'revolut', label: t('Revolut') },
 ];
-// const { data: travelOptions } = useFetch<Array<Travel>>('/api/travels', {
-//   transform: (travelData: TravelOption[]) => travelData.map(travel => {
-//     const { id, name } = travel;
-//     return { value: id, label: name};
-//   }),
-// });
+
 const travels = await $fetch('/api/travels');
 const travelOptions = computed(() => travels?.map((travel: Travel) => {
   const { id, name } = travel;
@@ -80,43 +77,83 @@ function submitForm() {
   <WeModal v-model="isOpen">
     <template #content>
       <h1 class="mb-4 text-2xl font-bold">{{ $t('New booking') }}</h1>
-      <VeeForm ref="userForm" :validation-schema="customerInfoSchema">
-        <div class="grid grid-cols-2 gap-4">
-          <div v-for="entry in formFields" :key="entry">
-            <label :for="entry" class="block text-sm font-medium text-gray-700">
-              {{ userFieldLabels[entry] as unknown }}
+      <div class="h-[30vh] relative">
+        <div v-if="wizzardStep === 1" class="absolute top-0 left-0 w-full">
+          <label for="travel" class="block text-md font-medium text-gray-700 font-body mb-3">
+            {{ $t('Select travel') }}
+          </label>
+          <SelectComponent
+            id="travel"
+            v-model="bookingData.travelId"
+            name="travel"
+            :options="travelOptions"
+            class="w-full font-body"
+          />
+        </div>
+        <div v-else-if="wizzardStep === 2" class="absolute top-0 left-0 w-full">
+          <VeeForm ref="userForm" :validation-schema="customerInfoSchema">
+            <div class="grid grid-cols-2 gap-4">
+              <div v-for="entry in formFields" :key="entry">
+                <label :for="entry" class="block text-sm font-medium text-gray-700">
+                  {{ userFieldLabels[entry] as unknown }}
+                </label>
+                <VeeField
+                  v-if="entry !== 'age' && entry !== 'gender'"
+                  :id="entry"
+                  v-model="userFormData[entry]"
+                  :name="entry"
+                  type="text"
+                  class="mt-1 block w-full px-3 py-2 border border-base-500 rounded-md shadow-sm focus:outline-none focus:ring-state-info-700 focus:border-state-info-500 sm:text-sm"
+                />
+                <SelectComponent
+                  v-else-if="entry === 'age'"
+                  id="age"
+                  v-model="userFormData.age"
+                  name="age"
+                  :options="ageOptions"
+                  class="w-full"
+                />
+                <SelectComponent
+                  v-else
+                  id="gender"
+                  v-model="userFormData.gender"
+                  name="gender"
+                  :options="genderOptions"
+                  class="w-full"
+                />
+                <ErrorMessage v-if="entry !== 'age' && entry !== 'gender'" :name="entry" class="text-primary-300" />
+              </div>
+            </div>
+          </VeeForm>
+        </div>
+        <div v-else class="absolute top-0 left-0 w-full">
+          <div>
+            <label for="payment" class="block text-sm font-medium text-gray-700">
+              {{ $t('Select payment method') }}
             </label>
-            <VeeField
-              v-if="entry !== 'age' && entry !== 'gender'"
-              :id="entry"
-              v-model="userFormData[entry]"
-              :name="entry"
-              type="text"
-              class="mt-1 block w-full px-3 py-2 border border-base-500 rounded-md shadow-sm focus:outline-none focus:ring-state-info-700 focus:border-state-info-500 sm:text-sm"
-            />
             <SelectComponent
-              v-else-if="entry === 'age'"
-              id="age"
-              v-model="userFormData.age"
-              name="age"
-              :options="ageOptions"
+              id="payment"
+              v-model="bookingData.payment"
+              name="payment"
+              :options="paymentOptions"
               class="w-full"
             />
-            <SelectComponent
-              v-else
-              id="gender"
-              v-model="userFormData.gender"
-              name="gender"
-              :options="genderOptions"
-              class="w-full"
+            <label for="notes" class="block text-sm font-medium text-gray-700">
+              {{ $t('Notes') }}
+            </label>
+            <textarea
+              id="notes"
+              v-model="bookingData.notes"
+              name="notes"
+              rows="3"
+              class="mt-1 block w-full px-3 py-2 border border-base-500 rounded-md shadow-sm focus:outline-none focus:ring-state-info-700 focus:border-state-info-500 sm:text-sm max-h-52"
             />
-            <ErrorMessage v-if="entry !== 'age' && entry !== 'gender'" :name="entry" class="text-primary-300" />
           </div>
         </div>
-      </VeeForm>
+      </div>
     </template>
     <template #actions="{ close }">
-      <div class="flex gap-2">
+      <div class="flex justify-between w-full">
         <button
           class="btn btn--secondary--outline"
           type="button"
@@ -124,14 +161,33 @@ function submitForm() {
         >
           <span>{{ $t('Cancel') }}</span>
         </button>
-        <button
-          class="btn btn--primary"
-          type="button"
-          :disabled="!isFormValid"
-          @click="submitForm"
-        >
-          <span>{{ $t('Create booking') }}</span>
-        </button>
+        <div class="flex gap-2">
+          <button
+            v-if="wizzardStep > 1"
+            class="btn btn--secondary"
+            type="button"
+            @click="wizzardStep = wizzardStep - 1"
+          >
+            <span>{{ $t('Prev') }}</span>
+          </button>
+          <button
+            v-if="wizzardStep < 3"
+            class="btn btn--secondary"
+            type="button"
+            :disabled="wizzardStep === 2 && !isFormValid"
+            @click="wizzardStep = wizzardStep + 1"
+          >
+            <span>{{ $t('Next') }}</span>
+          </button>
+          <button
+            v-if="wizzardStep === 3"
+            class="btn btn--primary"
+            type="button"
+            @click="submitForm()"
+          >
+            <span>{{ $t('Create booking') }}</span>
+          </button>
+        </div>
       </div>
     </template>
   </WeModal>
